@@ -78,7 +78,8 @@ const FitScreen = () => {
         <Pressable
           onPress={() => {
             navigation.navigate('Rest');
-            setCompleted(...completed, current?.name);
+            setCompleted([...completed, current.name]);
+            console.log(completed);
             setWorkout(workout + 1);
             setMinutes(minutes + 2.5);
             setCalories(calories + 6.3);
