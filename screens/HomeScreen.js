@@ -9,8 +9,20 @@ import {
 import React from 'react';
 import {home} from '../assets';
 import FitnessCards from '../components/FitnessCards';
+import {FitnessItems} from '../Context';
+import {useContext} from 'react';
 
 const HomeScreen = () => {
+  const {
+    completed,
+    setCompleted,
+    minutes,
+    setMinutes,
+    calories,
+    setCalories,
+    setWorkout,
+    workout,
+  } = useContext(FitnessItems);
   return (
     <ScrollView
       style={{
@@ -41,7 +53,7 @@ const HomeScreen = () => {
                 color: 'white',
                 fontSize: 19,
               }}>
-              0
+              {workout}
             </Text>
             <Text
               style={{
@@ -62,7 +74,7 @@ const HomeScreen = () => {
                 color: 'white',
                 fontSize: 19,
               }}>
-              0
+              {parseFloat(calories).toFixed(2)}
             </Text>
             <Text
               style={{
@@ -83,7 +95,7 @@ const HomeScreen = () => {
                 color: 'white',
                 fontSize: 19,
               }}>
-              0
+              {parseFloat(minutes).toFixed(2)}
             </Text>
             <Text
               style={{

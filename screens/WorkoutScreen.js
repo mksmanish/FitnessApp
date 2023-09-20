@@ -9,11 +9,23 @@ import {
 } from 'react-native';
 import React from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {arrow, sparkler} from '../assets';
+import {arrow, checks, sparkler} from '../assets';
+import {useContext} from 'react';
+import {FitnessItems} from '../Context';
 
 const WorkoutScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
+  const {
+    completed,
+    setCompleted,
+    minutes,
+    setMinutes,
+    calories,
+    setCalories,
+    setWorkout,
+    workout,
+  } = useContext(FitnessItems);
 
   return (
     <>
@@ -23,7 +35,7 @@ const WorkoutScreen = () => {
           source={{uri: route.params?.image}}
         />
         <Pressable
-          onPress={() => navigation.goBack()}
+          onPress={() => navigation.navigate('Home')}
           style={{position: 'absolute', left: 20, top: 25}}>
           <Image
             style={{
@@ -67,13 +79,21 @@ const WorkoutScreen = () => {
                 x{item?.sets}
               </Text>
             </View>
+
+            {completed.includes(item?.name) ? (
+              <Image
+                source={checks}
+                resizeMode="contain"
+                style={{width: 30, height: 30}}></Image>
+            ) : null}
           </Pressable>
         ))}
       </ScrollView>
       <Pressable
-        onPress={() =>
-          navigation.navigate('Fits', {exercises: route.params.exercises})
-        }
+        onPress={() => {
+          navigation.navigate('Fits', {exercises: route.params.exercises});
+          setCompleted([]);
+        }}
         style={{
           backgroundColor: 'green',
           padding: 10,
