@@ -1,10 +1,11 @@
 import {StyleSheet, Text, View, Image, Pressable} from 'react-native';
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
 const FitScreen = () => {
   const route = useRoute();
+  const navigation = useNavigation();
   const [index, setIndex] = useState(0);
   const exercises = route.params?.exercises;
   const current = exercises[index];
@@ -35,27 +36,155 @@ const FitScreen = () => {
         }}>
         x{current?.sets}
       </Text>
+      {index + 1 >= exercises.length ? (
+        <Pressable
+          onPress={() => {
+            navigation.navigate('Home');
+          }}
+          style={{
+            backgroundColor: 'red',
+            padding: 10,
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '45%',
+            alignSelf: 'center',
+            borderRadius: 20,
+            marginTop: 30,
+            height: 55,
+          }}>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontSize: 20,
+              fontWeight: '600',
+              color: 'white',
+            }}>
+            Done
+          </Text>
+        </Pressable>
+      ) : (
+        <Pressable
+          onPress={() => {
+            navigation.navigate('Rest');
+            setTimeout(() => {
+              setIndex(index + 1);
+            }, 2000);
+          }}
+          style={{
+            backgroundColor: 'red',
+            padding: 10,
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '45%',
+            alignSelf: 'center',
+            borderRadius: 20,
+            marginTop: 30,
+            height: 55,
+          }}>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontSize: 20,
+              fontWeight: '600',
+              color: 'white',
+            }}>
+            Done
+          </Text>
+        </Pressable>
+      )}
+
       <Pressable
         style={{
-          backgroundColor: 'green',
-          padding: 10,
-          justifyContent: 'center',
+          justifyContent: 'space-between',
+          flexDirection: 'row',
           alignItems: 'center',
-          width: '50%',
-          alignSelf: 'center',
-          borderRadius: 15,
+          marginLeft: 'auto',
+          marginRight: 'auto',
           marginTop: 30,
-          height: 55,
+          width: '90%',
         }}>
-        <Text
+        <Pressable
+          disabled={index == 0}
+          onPress={() => {
+            navigation.navigate('Rest');
+            setTimeout(() => {
+              setIndex(index - 1);
+            }, 2000);
+          }}
           style={{
-            textAlign: 'center',
-            fontSize: 20,
-            fontWeight: '600',
-            color: 'white',
+            backgroundColor: 'green',
+            padding: 10,
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '40%',
+            alignSelf: 'center',
+            borderRadius: 20,
+            height: 55,
           }}>
-          Done
-        </Text>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontSize: 20,
+              fontWeight: '600',
+              color: 'white',
+            }}>
+            PREV
+          </Text>
+        </Pressable>
+        {index + 1 >= exercises.length ? (
+          <Pressable
+            onPress={() => {
+              navigation.navigate('Home');
+            }}
+            style={{
+              backgroundColor: 'green',
+              padding: 10,
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '40%',
+              alignSelf: 'center',
+              borderRadius: 20,
+              height: 55,
+            }}>
+            <Text
+              style={{
+                textAlign: 'center',
+                fontSize: 20,
+                fontWeight: '600',
+                color: 'white',
+              }}>
+              SKIP
+            </Text>
+          </Pressable>
+        ) : (
+          <Pressable
+            onPress={() => {
+              navigation.navigate('Rest');
+              setTimeout(() => {
+                setIndex(index + 1);
+              }, 2000);
+            }}
+            style={{
+              backgroundColor: 'green',
+              padding: 10,
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '40%',
+              alignSelf: 'center',
+              borderRadius: 20,
+              height: 55,
+            }}>
+            <Text
+              style={{
+                textAlign: 'center',
+                fontSize: 20,
+                fontWeight: '600',
+                color: 'white',
+              }}>
+              SKIP
+            </Text>
+          </Pressable>
+        )}
       </Pressable>
     </SafeAreaView>
   );
