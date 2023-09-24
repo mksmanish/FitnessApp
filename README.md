@@ -1,3 +1,9 @@
+Used static data and images,gif for differnet exercises and Used some static based calculation for time and calories
+
+<img width="1258" alt="Screenshot 2023-09-24 at 11 59 01 PM" src="https://github.com/mksmanish/FitnessApp/assets/30216938/db60b82f-f41a-4aee-8186-ec6a95cac363">
+
+
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
